@@ -32,22 +32,22 @@ func loadInput(filename string) []int {
 	return masses
 }
 
-func max(a, b int) int {
-	if a > b {
-		return a
-	} else {
-		return b
-	}
+func fuelCount(mass int) int {
+	return (mass / 3) - 2
 }
 
-func fuelCount(mass int) int {
-	return max(0, (mass / 3) - 2)
+func fuelRequired(mass int) int {
+	total := 0
+	for m := fuelCount(mass); m > 0; m = fuelCount(m) {
+		total += m
+	}
+	return total
 }
 
 func countFuel(modulesMass []int) int {
 	res := 0
 	for _, mass := range modulesMass {
-		res += fuelCount(mass)
+		res += fuelRequired(mass)
 	}
 	return res
 }
